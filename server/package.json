@@ -4,7 +4,8 @@
     "description": "gettapet server",
     "main": "src/index.js",
     "scripts": {
-        "start": "node src/index.js",
+        "build": "npm i",
+        "start": "nodemon src/index.js",
         "test": "echo \"Error: no test specified\" && exit 1"
     },
     "author": "siam-jawad",
