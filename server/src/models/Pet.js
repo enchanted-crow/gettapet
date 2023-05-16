@@ -20,7 +20,6 @@ const PetSchema = new mongoose.Schema(
         },
         breed: {
             type: String,
-            required: true,
         },
         image: {
             type: String,
