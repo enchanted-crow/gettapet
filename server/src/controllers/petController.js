@@ -18,13 +18,27 @@ exports.getOne = async (req, res) => {
     try {
         const { id } = req.params;
         const pet = await Pet.findById(id);
-        res.json(pet);
-    }
-    catch (error) {
+        console.log(pet);
+
+        // if (!pet) {
+        //     return res.status(304).json({
+        //         status: 'fetched',
+        //         message: 'Object returned null. Might well be a 304 :3',
+        //     });
+        // }
+
+        res.status(200).json({
+            status: 'fetched',
+            data: pet,
+        });
+    } catch (error) {
         console.log(error);
-        res.status(400).json(error);
+        res.json({
+            status: 'error',
+            message: error.message,
+        });
     }
-}
+};
 
 exports.getByCategory = async (req, res) => {
     const { categoryId } = req.params;
