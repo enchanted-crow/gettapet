@@ -43,6 +43,8 @@ router.get('/get/:id', petController.getOne);
 
 router.get('/category/:categoryId', petController.getByCategory);
 
+router.get('/pet/search', petController.searchPet);
+
 // router.put('/update/:id', upload.fields([
 //     {
 //         name: "image",

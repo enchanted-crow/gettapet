@@ -25,7 +25,7 @@ function PetPage() {
         // Function to fetch pets data from the backend
         const fetchPets = async () => {
             try {
-                const response = await fetch(`http://localhost:4000/api/pet/get/${petId}`);
+                const response = await fetch(`https://gettapet-server.onrender.com/api/pet/get/${petId}`);
                 const data = await response.json();
                 setPetData(data.data);
                 console.log(data)

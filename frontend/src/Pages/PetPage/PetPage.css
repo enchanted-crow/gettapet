@@ -174,7 +174,6 @@ body {
 .pet-description {
     display: flex;
     flex-direction: column;
-    /* align-items: stretch; */
     margin-top: 30px;
     margin-bottom: 80px;
     padding: 20px;

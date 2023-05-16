@@ -33,7 +33,7 @@ function PetForm() {
                 }
             });
 
-            const response = await fetch('http://localhost:4000/api/pet/create', {
+            const response = await fetch('https://gettapet-server.onrender.com/api/pet/create', {
                 method: 'POST',
                 body: formData,
             });
