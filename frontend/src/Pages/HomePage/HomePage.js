@@ -9,6 +9,12 @@ const categoryImages = {
     Bird: '/images/homepage/bird-container.jpg',
 };
 
+const petCategoryId = {
+    Cat: '6462c865c6824c90a49e9843',
+    Dog: '6462c7dcc6824c90a49e983e',
+    Bird: '6462df4a03139ccfcef2982c',
+}
+
 function HomePage() {
     return (
         <div className="homepage-container">
@@ -22,7 +28,7 @@ function HomePage() {
 
             <div className="category-container">
                 {Object.keys(categoryImages).map((category) => (
-                    <Link to={`/${category.toLowerCase()}`} key={category} className="category">
+                    <Link to={`/category/${petCategoryId[category]}`} key={category} className="category">
                         <div className="category-image-wrapper">
                             <img src={categoryImages[category]} alt={category} className="category-image" />
                         </div>

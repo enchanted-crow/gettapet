@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import FileBase64 from 'react-file-base64';
 import './PetForm.css';
 
 function PetForm() {
@@ -9,9 +10,9 @@ function PetForm() {
         description: '',
         breed: '',
         image: '',
-        imageLabel: '',
-        additionalImages: [],
         category: '',
+        location: '',
+        owner_contact_no: '',
     });
 
     const handleChange = (e) => {
@@ -19,20 +20,22 @@ function PetForm() {
         setFormData((prevData) => ({ ...prevData, [name]: value }));
     };
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        console.log(formData);
-        submitForm(formData);
-    };
-
     const submitForm = async (petData) => {
         try {
-            const response = await fetch('http://localhost:4000/pet/create', {
+            const formData = new FormData();
+            Object.entries(petData).forEach(([key, value]) => {
+                if (Array.isArray(value)) {
+                    value.forEach((item) => {
+                        formData.append(`${key}[]`, item);
+                    });
+                } else {
+                    formData.append(key, value);
+                }
+            });
+
+            const response = await fetch('http://localhost:4000/api/pet/create', {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(petData),
+                body: formData,
             });
 
             if (!response.ok) {
@@ -48,6 +51,18 @@ function PetForm() {
         }
     };
 
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+
+        if (formData.category === "none") {
+            // Display an error message or perform any desired action
+            return;
+        }
+
+        console.log(formData);
+        submitForm(formData);
+    };
 
     return (
         <div className="form-container">
@@ -99,41 +114,43 @@ function PetForm() {
                     name="breed"
                     value={formData.breed}
                     onChange={handleChange}
+                />
+
+                <label htmlFor="location">Location:</label>
+                <input
+                    type="text"
+                    id="location"
+                    name="location"
+                    value={formData.location}
+                    onChange={handleChange}
                     required
                 />
 
-                <label htmlFor="image">Image URL:</label>
+                <label htmlFor="owner_contact_no">Owner Contact Number:</label>
                 <input
                     type="text"
+                    id="owner_contact_no"
+                    name="owner_contact_no"
+                    value={formData.owner_contact_no}
+                    onChange={handleChange}
+                    required
+                />
+
+                <label htmlFor="image">Image:</label>
+                <FileBase64
+                    type="file"
                     id="image"
                     name="image"
-                    value={formData.image}
-                    onChange={handleChange}
-                />
-
-                <label htmlFor="imageLabel">Image Label:</label>
-                <input
-                    type="text"
-                    id="imageLabel"
-                    name="imageLabel"
-                    value={formData.imageLabel}
-                    onChange={handleChange}
-                />
-
-                <label htmlFor="additionalImages">Additional Images:</label>
-                <input
-                    type="text"
-                    id="additionalImages"
-                    name="additionalImages"
-                    value={formData.additionalImages}
-                    onChange={handleChange}
+                    multiple={false}
+                    onDone={({ base64 }) => setFormData({ ...formData, image: base64 })}
                 />
 
                 <label htmlFor="category">Category:</label>
                 <select id="category" name="category" value={formData.category} onChange={handleChange}>
-                    <option value="Cat">Cat</option>
-                    <option value="Dog">Dog</option>
-                    <option value="Bird">Bird</option>
+                    <option value="none">Select Category</option>
+                    <option value="6462c865c6824c90a49e9843">Cat</option>
+                    <option value="6462c7dcc6824c90a49e983e">Dog</option>
+                    <option value="6462df4a03139ccfcef2982c">Bird</option>
                 </select>
 
 

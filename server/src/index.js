@@ -19,8 +19,8 @@ app.use('/public', express.static(path.join(__dirname, 'public')));
 app.use('/api/category', CategoryRoutes);
 app.use('/api/pet', PetRoutes);
 
-const mongoUri = process.env.DATABASE_URL || 'mongodb://0.0.0.0:27017/gettapetDB';
-// const mongoUri = 'mongodb+srv://admin:nfQmoVWmQhhmU4Qa@atlascluster.dbxtm3e.mongodb.net/?retryWrites=true&w=majority';
+// const mongoUri = process.env.DATABASE_URL || 'mongodb://0.0.0.0:27017/gettapetDB';
+const mongoUri = 'mongodb+srv://admin:nfQmoVWmQhhmU4Qa@atlascluster.dbxtm3e.mongodb.net/?retryWrites=true&w=majority';
 mongoose.connect(mongoUri, {
     useNewUrlParser: true,
 });

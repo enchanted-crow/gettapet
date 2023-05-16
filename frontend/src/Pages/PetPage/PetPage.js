@@ -16,6 +16,17 @@ function PetPage() {
     const [activeIndex, setActiveIndex] = useState(0);
     const imageContainerRef = useRef(null);
     const dotRefs = useRef([]);
+    const [petData, setPetData] = useState({
+        name: '',
+        age: '',
+        color: '',
+        description: '',
+        breed: '',
+        image: '',
+        category: '',
+        location: '',
+        owner_contact_no: '',
+    });
 
     useEffect(() => {
         const imageContainer = imageContainerRef.current;
@@ -50,6 +61,19 @@ function PetPage() {
         });
 
         window.addEventListener('resize', updateActiveIndex);
+
+        // Function to fetch pets data from the backend
+        const fetchPets = async () => {
+            try {
+                const response = await fetch('http://localhost:4000/api/pet/get/646357b94da24ce71283d875'); // Replace '/api/pets' with the actual URL of your backend endpoint
+                const data = await response.json();
+                setPetData(data);
+            } catch (error) {
+                console.error(error);
+            }
+        };
+
+        fetchPets();
 
         return () => {
             imageContainer.removeEventListener('scroll', updateActiveIndex);
@@ -89,7 +113,7 @@ function PetPage() {
 
             {/* Image Carousel */}
             <div className="image-container" ref={imageContainerRef}>
-                {Object.keys(petImages).map((imageName, index) => (
+                {/* {Object.keys(petImages).map((imageName, index) => (
                     <img
                         key={index}
                         className="image"
@@ -97,7 +121,14 @@ function PetPage() {
                         alt={`Pet image ${imageName}`}
                         style={{ scrollSnapAlign: 'center' }}
                     />
-                ))}
+                ))} */}
+
+                <img
+                    className="image"
+                    src={petData.image}
+                    alt={`Pet image`}
+                    style={{ scrollSnapAlign: 'center' }}
+                />
             </div>
 
             {/* Image Carousel Dots */}
@@ -114,15 +145,14 @@ function PetPage() {
 
             <div className="pet-description">
                 <div class="pet-info">
-                    <div class="pet-name">Coco</div>
+                    <div class="pet-name">{petData.name}</div>
                     <div class="pet-info-details">
-                        <div class="pet-breed"> Welsh Corgi</div>
-                        <div class="pet-age">2 years old</div>
-                        <div class="pet-location">Dhaka</div>
+                        <div class="pet-breed">{petData.breed}</div>
+                        <div class="pet-age">{petData.age}</div>
+                        <div class="pet-location">{petData.location}</div>
                     </div>
                 </div>
-                <p className="pet-description-text">
-                    Friendly, adorable and well trained, Coco would love to meet you.
+                <p className="pet-description-text">{petData.description}
                 </p>
             </div>
 
