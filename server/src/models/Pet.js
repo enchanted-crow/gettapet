@@ -25,12 +25,9 @@ const PetSchema = new mongoose.Schema(
         image: {
             type: String,
         },
-        imageLabel: {
-            type: String,
-        },
-        additionalImages: [{type: String}],
+        additionalImages: [{ type: String }],
 
-        category:{
+        category: {
             type: mongoose.Schema.Types.ObjectId,
             ref: 'Category'
         }

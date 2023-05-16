@@ -29,7 +29,7 @@ exports.getOne = async (req, res) => {
 exports.create = async (req, res) => {
     try {
         console.log(req.files);
-        const { name, age, color, breed, description, imageLabel, category } = req.body;
+        const { name, age, color, breed, description, category } = req.body;
         const { image, additionalImages } = req.files;
 
         let imagePath = '';
@@ -49,7 +49,7 @@ exports.create = async (req, res) => {
             breed,
             color,
             description,
-            imageLabel,
+
             category,
             image: imagePath,
             additionalImages: additionalImagesPath,
@@ -68,7 +68,7 @@ exports.create = async (req, res) => {
 exports.update = async (req, res) => {
     try {
         const { id } = req.params;
-        const { name, age, color, breed, description, imageLabel, category } = req.body;
+        const { name, age, color, breed, description, category } = req.body;
         const { image, additionalImages } = req.files;
 
         let imagePath = '';
@@ -119,7 +119,7 @@ exports.update = async (req, res) => {
             breed,
             color,
             description,
-            imageLabel,
+
             category,
             image: imagePath,
             additionalImages: additionalImagesPath,
