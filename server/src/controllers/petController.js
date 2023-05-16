@@ -26,6 +26,17 @@ exports.getOne = async (req, res) => {
     }
 }
 
+exports.getByCategory = async (req, res) => {
+    const { categoryId } = req.params;
+    try {
+        const pets = await Pet.find({ category: categoryId }).populate('category');
+        res.json({ pets });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Failed to fetch pets by category' });
+    }
+}
+
 exports.create = async (req, res) => {
     try {
         console.log(req.files);

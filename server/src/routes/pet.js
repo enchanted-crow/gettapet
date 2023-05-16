@@ -41,25 +41,19 @@ router.get('/all', petController.getAll);
 
 router.get('/get/:id', petController.getOne);
 
-router.put('/update/:id', upload.fields([
-    {
-        name: "image",
-        maxCount: 1,
-    },
-    {
-        name: 'additionalImages',
-        maxCount: 5,
-    }
-]), petController.update);
+router.get('/category/:categoryId', petController.getByCategory);
+
+// router.put('/update/:id', upload.fields([
+//     {
+//         name: "image",
+//         maxCount: 1,
+//     }
+// ]), petController.update);
 
 router.post('/create', upload.fields([
     {
         name: "image",
         maxCount: 1,
-    },
-    {
-        name: 'additionalImages',
-        maxCount: 5,
     }
 ]), petController.create);
 

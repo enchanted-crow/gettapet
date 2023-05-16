@@ -28,7 +28,14 @@ const PetSchema = new mongoose.Schema(
         category: {
             type: mongoose.Schema.Types.ObjectId,
             ref: 'Category'
-        }
+        },
+        location: {
+            type: String,
+        },
+        owner_contact_no: {
+            type: String,
+        },
+
     },
     {
         timestamps: true,
