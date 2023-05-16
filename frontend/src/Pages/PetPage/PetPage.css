@@ -22,7 +22,7 @@ body {
     display: flex;
     align-items: center;
     width: 100%;
-    margin-bottom: 20px;
+    /* margin-bottom: 20px; */
 }
 
 .back-button {
@@ -31,8 +31,14 @@ body {
     color: #555;
     font-size: 20px;
     margin-right: 10px;
+    margin-top: -5px;
     cursor: pointer;
-    padding: 10px;
+}
+
+
+.back-button:hover {
+    color: white;
+    /* Change this to the desired hover color */
 }
 
 .search-wrapper {
@@ -69,13 +75,16 @@ body {
     margin: 0 -10px;
     padding: 0 10px;
     position: relative;
+    justify-content: center;
+    width: 100%;
 }
 
 .image {
     scroll-snap-align: center;
     max-width: 100%;
     height: auto;
-    margin: 0 10px;
+    margin: 10px 10px;
+    align-content: center;
 }
 
 /* Next and Previous Buttons */
@@ -165,7 +174,7 @@ body {
 .pet-description {
     display: flex;
     flex-direction: column;
-    align-items: stretch;
+    /* align-items: stretch; */
     margin-top: 30px;
     margin-bottom: 80px;
     padding: 20px;
@@ -173,20 +182,36 @@ body {
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
     padding-bottom: 50px;
     text-align: justify;
+    width: 100%;
+}
+
+.pet-name {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: left;
+}
+
+.custom-pet-name {
+    font-size: 2em;
+    font-weight: normal;
+    margin-right: 10px;
+}
+
+.pet-age {
+    font-size: 1em;
+    font-weight: 400;
+    margin-top: 10px;
+    margin-bottom: 5px;
 }
 
 .pet-info {
     display: flex;
     flex-direction: row;
-    align-items: center;
+    align-items: flex-begin;
     justify-content: space-between;
     margin-bottom: 20px;
-}
-
-.pet-name {
-    font-size: 24px;
-    font-weight: bold;
-    margin-right: 10px;
 }
 
 .pet-info-details {
@@ -195,8 +220,8 @@ body {
     align-items: flex-end;
 }
 
-.pet-age,
 .pet-location,
+.pet-color,
 .pet-breed {
     font-size: 16px;
     margin-bottom: 5px;
@@ -208,8 +233,16 @@ body {
     line-height: 1.5;
 }
 
+.owner-contact-no {
+    font-size: 16px;
+    margin-top: 15px;
+    font-style: italic;
+    align-items: left;
+}
+
 .bottom-panel {
     width: 100%;
+    height: 65px;
     display: flex;
     justify-content: space-around;
     align-items: center;

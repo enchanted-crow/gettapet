@@ -10,7 +10,7 @@ function App() {
         <Router>
             <Routes>
                 <Route exact path="/" element={<HomePage />} />
-                <Route exact path="/pet/:petId" element={<PetPage />} />
+                <Route exact path="/:pet/:petId" element={<PetPage />} />
                 <Route exact path="/category/:categoryId" element={<PetByCategoryPage />} />
                 <Route exact path="/:new-post" element={<PetForm />} />
                 {/* Add routes for other pages */}

@@ -15,22 +15,27 @@ const petImages = {
 function PetPage() {
     const { petId } = useParams();
     const [activeIndex, setActiveIndex] = useState(0);
+    const [petData, setPetData] = useState({});
     const imageContainerRef = useRef(null);
     const dotRefs = useRef([]);
-    const [petData, setPetData] = useState({
-        name: '',
-        age: '',
-        color: '',
-        description: '',
-        breed: '',
-        image: '',
-        category: '',
-        location: '',
-        owner_contact_no: '',
-    });
 
     useEffect(() => {
         const imageContainer = imageContainerRef.current;
+
+        // Function to fetch pets data from the backend
+        const fetchPets = async () => {
+            try {
+                const response = await fetch(`http://localhost:4000/api/pet/get/${petId}`);
+                const data = await response.json();
+                setPetData(data.data);
+                console.log(data)
+                console.log(petData)
+            } catch (error) {
+                console.error(error);
+            }
+        };
+
+        fetchPets();
 
         const updateActiveIndex = () => {
             const imageWidth = imageContainer.querySelector('.image').offsetWidth;
@@ -63,24 +68,11 @@ function PetPage() {
 
         window.addEventListener('resize', updateActiveIndex);
 
-        // Function to fetch pets data from the backend
-        const fetchPets = async () => {
-            try {
-                const response = await fetch('http://localhost:4000/api/pet/get/${petId}'); // Replace '/api/pets' with the actual URL of your backend endpoint
-                const data = await response.json();
-                setPetData(data);
-            } catch (error) {
-                console.error(error);
-            }
-        };
-
-        fetchPets();
-
         return () => {
             imageContainer.removeEventListener('scroll', updateActiveIndex);
             window.removeEventListener('resize', updateActiveIndex);
         };
-    }, []);
+    }, [petId]);
 
     const handleDotClick = (index) => {
         setActiveIndex(index);
@@ -104,26 +96,18 @@ function PetPage() {
     return (
         <div className="homepage-container">
             {/* Top Bar */}
-            <div class="search-bar-container">
-                <button class="back-button" onClick={() => window.history.back()}><i class="fas fa-chevron-left"></i></button>
-                <div class="search-wrapper">
-                    <input type="text" class="search-bar" placeholder="Search" />
-                    <i class="fas fa-search"></i>
-                </div>` `
+            <div className="search-bar-container">
+                <button className="back-button" onClick={() => window.history.back()}>
+                    <i className="fas fa-chevron-left"></i>
+                </button>
+                <div className="search-wrapper">
+                    <input type="text" className="search-bar" placeholder="Search" />
+                    <i className="fas fa-search"></i>
+                </div>
             </div>
 
             {/* Image Carousel */}
             <div className="image-container" ref={imageContainerRef}>
-                {/* {Object.keys(petImages).map((imageName, index) => (
-                    <img
-                        key={index}
-                        className="image"
-                        src={petImages[imageName]}
-                        alt={`Pet image ${imageName}`}
-                        style={{ scrollSnapAlign: 'center' }}
-                    />
-                ))} */}
-
                 <img
                     className="image"
                     src={petData.image}
@@ -145,17 +129,21 @@ function PetPage() {
             </div>
 
             <div className="pet-description">
-                <div class="pet-info">
-                    <div class="pet-name">{petData.name}</div>
-                    <div class="pet-info-details">
-                        <div class="pet-breed">{petData.breed}</div>
-                        <div class="pet-age">{petData.age}</div>
-                        <div class="pet-location">{petData.location}</div>
+                <div className="pet-info">
+                    <div className="pet-name">
+                        <div className="custom-pet-name">{petData.name}</div>
+                        <div className="pet-age">{petData.age}</div>
+                    </div>
+                    <div className="pet-info-details">
+                        <div className="pet-breed">{petData.breed}</div>
+                        <div className="pet-color">{petData.color}</div>
+                        <div className="pet-location">{petData.location}</div>
                     </div>
                 </div>
-                <p className="pet-description-text">{petData.description}
-                </p>
+                <p className="pet-description-text">{petData.description}</p>
+                <p className="owner-contact-no">{petData.owner_contact_no}</p>
             </div>
+
 
 
             {/* Bottom Panel */}

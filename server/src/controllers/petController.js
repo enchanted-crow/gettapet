@@ -18,14 +18,6 @@ exports.getOne = async (req, res) => {
     try {
         const { id } = req.params;
         const pet = await Pet.findById(id);
-        console.log(pet);
-
-        // if (!pet) {
-        //     return res.status(304).json({
-        //         status: 'fetched',
-        //         message: 'Object returned null. Might well be a 304 :3',
-        //     });
-        // }
 
         res.status(200).json({
             status: 'fetched',

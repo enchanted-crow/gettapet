@@ -22,7 +22,7 @@ body {
     display: flex;
     align-items: center;
     width: 100%;
-    margin-bottom: 20px;
+    margin-bottom: 40px;
 }
 
 .back-button {
@@ -107,6 +107,7 @@ body {
 
 .bottom-panel {
     width: 100%;
+    height: 65px;
     display: flex;
     justify-content: space-around;
     align-items: center;
