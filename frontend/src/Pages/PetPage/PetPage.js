@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { FaPlus, FaUser, FaHome } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import './PetPage.css';
 
@@ -13,6 +13,7 @@ const petImages = {
 };
 
 function PetPage() {
+    const { petId } = useParams();
     const [activeIndex, setActiveIndex] = useState(0);
     const imageContainerRef = useRef(null);
     const dotRefs = useRef([]);
@@ -65,7 +66,7 @@ function PetPage() {
         // Function to fetch pets data from the backend
         const fetchPets = async () => {
             try {
-                const response = await fetch('http://localhost:4000/api/pet/get/646357b94da24ce71283d875'); // Replace '/api/pets' with the actual URL of your backend endpoint
+                const response = await fetch('http://localhost:4000/api/pet/get/${petId}'); // Replace '/api/pets' with the actual URL of your backend endpoint
                 const data = await response.json();
                 setPetData(data);
             } catch (error) {
