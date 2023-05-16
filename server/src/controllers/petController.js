@@ -29,27 +29,10 @@ exports.getOne = async (req, res) => {
 exports.create = async (req, res) => {
     try {
         console.log(req.files);
-        const { name, age, color, breed, description, category } = req.body;
-        const { image } = req.files;
 
-        let imagePath = '';
-
-        if (image && image.length > 0) {
-            imagePath = image[0].path;
-        }
-
-        const createdPet = await Pet.create({
-            name,
-            age,
-            breed,
-            color,
-            description,
-
-            category,
-            image: imagePath,
-        });
-
-        res.json({ message: 'Pet created', createdPet })
+        const createdPet = new Pet(req.body);
+        await createdPet.save();
+        res.status(201).json({ message: 'Pet created', createdPet });
     }
 
     catch (error) {
