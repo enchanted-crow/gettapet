@@ -68,6 +68,7 @@ body {
     padding: 0 10px;
     justify-content: left;
     -webkit-overflow-scrolling: touch;
+    padding-bottom: 50px;
 }
 
 .category {
