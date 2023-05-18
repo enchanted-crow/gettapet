@@ -3,7 +3,7 @@ import { Link, useParams } from 'react-router-dom';
 import { FaPlus, FaUser, FaHome } from 'react-icons/fa';
 import './PetSearchPage.css';
 
-const apiUrl = process.env.SERVER_API_URL;
+const apiUrl = process.env.REACT_APP_SERVER_API_URL;
 
 function PetSearchPage() {
     const { searchTerm: searchTermParam } = useParams();
