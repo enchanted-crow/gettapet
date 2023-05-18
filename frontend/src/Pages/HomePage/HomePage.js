@@ -25,9 +25,7 @@ function HomePage() {
 
     const performSearch = () => {
         if (searchTerm.trim()) {
-            // Redirect to PetSearchPage with the search term as a parameter
             window.location.href = `/search/${searchTerm}`;
-            // history.push(`/search/${searchTerm}`);
         }
     };
 

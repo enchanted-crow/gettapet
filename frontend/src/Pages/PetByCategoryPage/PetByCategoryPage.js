@@ -3,7 +3,7 @@ import { Link, useParams } from 'react-router-dom';
 import { FaPlus, FaUser, FaHome } from 'react-icons/fa';
 import './PetByCategoryPage.css';
 
-const apiUrl = process.env.REACT_APP_API_URL;
+const apiUrl = process.env.SERVER_API_URL;
 
 function PetByCategoryPage() {
     const { categoryId } = useParams();
@@ -17,9 +17,7 @@ function PetByCategoryPage() {
 
     const performSearch = () => {
         if (searchTerm.trim()) {
-            // Redirect to PetSearchPage with the search term as a parameter
             window.location.href = `/search/${searchTerm}`;
-            // history.push(`/search/${searchTerm}`);
         }
     };
 

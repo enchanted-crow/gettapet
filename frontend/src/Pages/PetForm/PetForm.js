@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import FileBase64 from 'react-file-base64';
 import './PetForm.css';
 
-const apiUrl = process.env.REACT_APP_API_URL;
+const apiUrl = process.env.SERVER_API_URL;
 
 function PetForm() {
     const [formData, setFormData] = useState({

@@ -4,7 +4,7 @@ import { Link, useParams } from 'react-router-dom';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import './PetPage.css';
 
-const apiUrl = process.env.REACT_APP_API_URL;
+const apiUrl = process.env.SERVER_API_URL;
 
 const petImages = {
     Dogs: '/images/homepage/dog-container.jpg',

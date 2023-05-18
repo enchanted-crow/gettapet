@@ -2,9 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { FaPlus, FaUser, FaHome } from 'react-icons/fa';
 import './PetSearchPage.css';
-// require('dotenv').config()
 
-const apiUrl = process.env.REACT_APP_API_URL;
+const apiUrl = process.env.SERVER_API_URL;
 
 function PetSearchPage() {
     const { searchTerm: searchTermParam } = useParams();
@@ -18,9 +17,7 @@ function PetSearchPage() {
 
     const performSearch = () => {
         if (searchTerm.trim()) {
-            // Redirect to PetSearchPage with the search term as a parameter
             window.location.href = `/search/${searchTerm}`;
-            // history.push(`/search/${searchTerm}`);
         }
     };
 
