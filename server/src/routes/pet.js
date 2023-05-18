@@ -6,7 +6,6 @@ const path = require('path')
 
 const router = express.Router();
 
-
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
         if (!fs.existsSync('public')) {

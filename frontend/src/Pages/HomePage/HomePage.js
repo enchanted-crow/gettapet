@@ -7,12 +7,14 @@ const categoryImages = {
     Cats: '/images/homepage/cat-container.jpg',
     Dogs: '/images/homepage/dog-container.jpg',
     Birds: '/images/homepage/bird-container.jpg',
+    Fishes: '/images/homepage/fish-container.jpg',
 };
 
 const petCategoryId = {
     Cats: '6462c865c6824c90a49e9843',
     Dogs: '6462c7dcc6824c90a49e983e',
     Birds: '6462df4a03139ccfcef2982c',
+    Fishes: '64663010daffe5049e397c7c',
 };
 
 function HomePage() {
