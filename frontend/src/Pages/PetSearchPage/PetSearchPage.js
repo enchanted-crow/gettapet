@@ -72,17 +72,23 @@ function PetSearchPage() {
                     <i className="fas fa-search" onClick={handleSearchSubmit}></i>
                 </div>
             </div>
+
             <div className="pet-by-category-container">
-                <h2></h2>
                 <div className="pet-list">
                     {pets.map((pet) => (
-                        <div key={pet._id} className="pet-card">
-                            <Link to={`/pet/${pet._id}`}>
-                                <img className="pet-image" src={pet.image} alt={`Pet ${pet.name}`} />
-                                <h3 className="pet-name">{pet.name}</h3>
-                                <p className="pet-description">{pet.breed}</p>
-                            </Link>
-                        </div>
+                        <Link to={`/pet/${pet._id}`} className="custom-link">
+                            <div key={pet._id} className="pet-category-card">
+
+                                <img className="pet-category-image" src={pet.image} alt={`Pet ${pet.name}`} />
+                                <div
+                                    className="pet-category-info">
+                                    <div className="pet-category-info-name">{pet.name}</div>
+                                    <div className="pet-category-info-details">{pet.age}</div>
+                                    <div className="pet-category-info-details">{pet.breed}</div>
+                                    <div className="pet-category-info-details">{pet.location}</div>
+                                </div>
+                            </div>
+                        </Link>
                     ))}
                 </div>
             </div>

@@ -87,7 +87,7 @@ body {
     align-content: center;
 }
 
-/* Next and Previous Buttons */
+/* Next and Previous Buttons
 .image-container .next,
 .image-container .prev {
     position: absolute;
@@ -112,7 +112,7 @@ body {
 
 .image-container .prev {
     left: 0;
-}
+} */
 
 /* Image Carousel Dots */
 .dot-container {
@@ -192,18 +192,20 @@ body {
     margin-bottom: 20px;
 }
 
-.pet-name {
+.pet-category-name {
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
     justify-content: flex-start;
     align-items: left;
+    font-size: ;
 }
 
 .custom-pet-name {
     font-size: 2em;
     font-weight: normal;
     margin-right: 10px;
+    align-self: flex-start;
 }
 
 .pet-age {
@@ -225,20 +227,20 @@ body {
 .pet-breed {
     font-size: 16px;
     margin-bottom: 5px;
-    align-items: left;
+    align-self: right;
 }
 
 .pet-description-text {
     font-size: 18px;
     line-height: 1.5;
-    align-items: flex-start;
+    align-self: flex-start;
 }
 
 .owner-contact-no {
     font-size: 16px;
     margin-top: 15px;
     font-style: italic;
-    align-items: left;
+    align-self: flex-start;
 }
 
 .bottom-panel {

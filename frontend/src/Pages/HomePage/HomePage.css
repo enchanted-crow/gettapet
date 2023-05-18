@@ -88,16 +88,14 @@ body {
     object-fit: cover;
 }
 
-.category-name {
-    display: block;
-    position: relative;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    margin: 0;
-    padding: 5px;
-    text-align: center;
-    color: #000;
+.home-pet-category-info {
+    align-self: flex;
+}
+
+.home-pet-category-name {
+    font-size: 24px;
+    font-weight: 500;
+    align-self: center;
 }
 
 .category:last-child {
