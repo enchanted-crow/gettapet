@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { FaPlus, FaUser, FaHome } from 'react-icons/fa';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams, useNavigate } from 'react-router-dom';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import './PetPage.css';
 
@@ -21,6 +21,7 @@ function PetPage() {
     const imageContainerRef = useRef(null);
     const dotRefs = useRef([]);
     const [searchTerm, setSearchTerm] = useState('');
+    const navigate = useNavigate();
 
     const handleSearchSubmit = (e) => {
         e.preventDefault();
@@ -29,9 +30,7 @@ function PetPage() {
 
     const performSearch = () => {
         if (searchTerm.trim()) {
-            // Redirect to PetSearchPage with the search term as a parameter
-            window.location.href = `/search/${searchTerm}`;
-            // history.push(`/search/${searchTerm}`);
+            navigate(`/search/${searchTerm}`);
         }
     };
 

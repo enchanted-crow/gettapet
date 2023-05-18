@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams, useNavigate } from 'react-router-dom';
 import { FaPlus, FaUser, FaHome } from 'react-icons/fa';
 import './PetSearchPage.css';
 
@@ -9,6 +9,7 @@ function PetSearchPage() {
     const { searchTerm: searchTermParam } = useParams();
     const [pets, setPets] = useState([]);
     const [searchTerm, setSearchTerm] = useState('');
+    const navigate = useNavigate();
 
     const handleSearchSubmit = (e) => {
         e.preventDefault();
@@ -17,7 +18,7 @@ function PetSearchPage() {
 
     const performSearch = () => {
         if (searchTerm.trim()) {
-            window.location.href = `/search/${searchTerm}`;
+            navigate(`/search/${searchTerm}`);
         }
     };
 

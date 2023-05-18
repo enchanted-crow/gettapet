@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { FaPlus, FaUser, FaHome } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './HomePage.css';
 
 const categoryImages = {
@@ -17,6 +17,7 @@ const petCategoryId = {
 
 function HomePage() {
     const [searchTerm, setSearchTerm] = useState('');
+    const navigate = useNavigate();
 
     const handleSearchSubmit = (e) => {
         e.preventDefault();
@@ -25,7 +26,7 @@ function HomePage() {
 
     const performSearch = () => {
         if (searchTerm.trim()) {
-            window.location.href = `/search/${searchTerm}`;
+            navigate(`/search/${searchTerm}`);
         }
     };
 
@@ -35,7 +36,6 @@ function HomePage() {
             performSearch();
         }
     };
-
 
     return (
         <div className="homepage-container">
@@ -58,11 +58,9 @@ function HomePage() {
                 <div className="pet-list">
                     {Object.keys(categoryImages).map((category) => (
                         <Link to={`/category/${petCategoryId[category]}`} key={category} className="custom-link">
-                            <div
-                                className="pet-category-card">
+                            <div className="pet-category-card">
                                 <img className="pet-category-image" src={categoryImages[category]} alt={category} />
-                                <div
-                                    className="home-pet-category-info">
+                                <div className="home-pet-category-info">
                                     <div className="home-pet-category-name">{category}</div>
                                 </div>
                             </div>
