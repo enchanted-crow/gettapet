@@ -20,8 +20,8 @@ app.use('/public', express.static(path.join(__dirname, 'public')));
 app.use('/api/category', CategoryRoutes);
 app.use('/api/pet', PetRoutes);
 
-const mongoUri = process.env.NODE_APP_REMOTE_DB_URL
-// const mongoUri = process.env.NODE_APP_LOCAL_DB_URL;
+const mongoUri = process.env.NODE_APP_DB_URI
+
 mongoose.connect(mongoUri, {
     useNewUrlParser: true,
 });
