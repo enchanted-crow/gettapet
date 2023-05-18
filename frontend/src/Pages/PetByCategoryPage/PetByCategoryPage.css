@@ -61,12 +61,14 @@ body {
 
 .pet-by-category-container {
     display: flex;
+    /* padding-bottom: 50px; */
 }
 
 .pet-list {
     display: grid;
     /* grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); */
     gap: 24px;
+    padding-bottom: 50px;
 }
 
 .custom-link {
