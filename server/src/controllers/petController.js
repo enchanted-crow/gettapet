@@ -38,33 +38,35 @@ exports.getByCategory = async (req, res) => {
         const pets = await Pet.find({ category: categoryId }).populate('category');
         res.json({ pets });
     } catch (error) {
-        console.error(error);
+        console.log(error);
         res.status(500).json({ message: 'Failed to fetch pets by category' });
     }
 };
 
 exports.searchPet = async (req, res) => {
-    const searchTerm = req.query.searchTerm; // Get the search term from the request query
+    const { searchTerm } = req.params; // Get the search term from the request params
 
     try {
-        // Perform the search using regular expressions and case-insensitive matching
-        const pets = await Pet.find({
-            $or: [
-                { name: { $regex: searchTerm, $options: 'i' } },
-                { age: { $regex: searchTerm, $options: 'i' } },
-                { color: { $regex: searchTerm, $options: 'i' } },
-                { description: { $regex: searchTerm, $options: 'i' } },
-                { breed: { $regex: searchTerm, $options: 'i' } },
-                { location: { $regex: searchTerm, $options: 'i' } },
-            ],
-        });
+        const searchOptions = [
+            { name: { $regex: `\\b${searchTerm}\\b`, $options: 'i' } },
+            { age: { $regex: `\\b${searchTerm}\\b`, $options: 'i' } },
+            { color: { $regex: `\\b${searchTerm}\\b`, $options: 'i' } },
+            { description: { $regex: `\\b${searchTerm}\\b`, $options: 'i' } },
+            { breed: { $regex: `\\b${searchTerm}\\b`, $options: 'i' } },
+            { location: { $regex: `\\b${searchTerm}\\b`, $options: 'i' } },
+        ];
 
-        res.json(pets);
+        const pets = await Pet.find({ $or: searchOptions });
+
+        res.json({ pets });
+        console.log(pets);
     } catch (error) {
-        console.error(error);
+        console.log(error);
         res.status(500).json({ message: 'An error occurred while searching for pets.' });
     }
 };
+
+
 
 exports.create = async (req, res) => {
     try {

@@ -4,6 +4,8 @@ import { Link, useParams } from 'react-router-dom';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import './PetPage.css';
 
+const apiUrl = process.env.REACT_APP_API_URL;
+
 const petImages = {
     Dogs: '/images/homepage/dog-container.jpg',
     Cats: '/images/homepage/dog-container.jpg',
@@ -18,6 +20,27 @@ function PetPage() {
     const [petData, setPetData] = useState({});
     const imageContainerRef = useRef(null);
     const dotRefs = useRef([]);
+    const [searchTerm, setSearchTerm] = useState('');
+
+    const handleSearchSubmit = (e) => {
+        e.preventDefault();
+        performSearch();
+    };
+
+    const performSearch = () => {
+        if (searchTerm.trim()) {
+            // Redirect to PetSearchPage with the search term as a parameter
+            window.location.href = `/search/${searchTerm}`;
+            // history.push(`/search/${searchTerm}`);
+        }
+    };
+
+    const handleKeyPress = (e) => {
+        if (e.key === 'Enter' && searchTerm.trim()) {
+            e.preventDefault();
+            performSearch();
+        }
+    };
 
     useEffect(() => {
         const imageContainer = imageContainerRef.current;
@@ -25,7 +48,7 @@ function PetPage() {
         // Function to fetch pets data from the backend
         const fetchPets = async () => {
             try {
-                const response = await fetch(`https://gettapet-server.onrender.com/api/pet/get/${petId}`);
+                const response = await fetch(`${apiUrl}/pet/get/${petId}`);
                 const data = await response.json();
                 setPetData(data.data);
                 console.log(data)
@@ -101,8 +124,15 @@ function PetPage() {
                     <i className="fas fa-chevron-left"></i>
                 </button>
                 <div className="search-wrapper">
-                    <input type="text" className="search-bar" placeholder="Search" />
-                    <i className="fas fa-search"></i>
+                    <input
+                        type="text"
+                        className="search-bar"
+                        placeholder="Search"
+                        value={searchTerm}
+                        onChange={(e) => setSearchTerm(e.target.value)}
+                        onKeyPress={handleKeyPress}
+                    />
+                    <i className="fas fa-search" onClick={handleSearchSubmit}></i>
                 </div>
             </div>
 
@@ -154,9 +184,9 @@ function PetPage() {
                 <Link to="/new-post" className="bottom-panel-icon">
                     <FaPlus />
                 </Link>
-                <Link to="/" className="bottom-panel-icon">
+                {/* <Link to="/" className="bottom-panel-icon">
                     <FaUser />
-                </Link>
+                </Link> */}
             </div>
         </div>
     );

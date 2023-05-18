@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const path = require('path');
 const morgan = require('morgan')
+require('dotenv').config();
 
 const CategoryRoutes = require("./routes/category");
 const PetRoutes = require("./routes/pet");
@@ -19,13 +20,14 @@ app.use('/public', express.static(path.join(__dirname, 'public')));
 app.use('/api/category', CategoryRoutes);
 app.use('/api/pet', PetRoutes);
 
-// const mongoUri = process.env.DATABASE_URL || 'mongodb://0.0.0.0:27017/gettapetDB';
-const mongoUri = 'mongodb+srv://admin:nfQmoVWmQhhmU4Qa@atlascluster.dbxtm3e.mongodb.net/?retryWrites=true&w=majority';
+const mongoUri = process.env.NODE_APP_REMOTE_DB_URL
+// const mongoUri = process.env.NODE_APP_LOCAL_DB_URL;
 mongoose.connect(mongoUri, {
     useNewUrlParser: true,
 });
 mongoose.connection.on('connected', () => {
     console.log("Connected to Mongodb...");
+    console.log(`Database: ${mongoUri}`);
 })
 mongoose.connection.on('error', (err) => {
     console.log("Error connecting to mongo", err);

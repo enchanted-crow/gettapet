@@ -1,47 +1,75 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { FaPlus, FaUser, FaHome } from 'react-icons/fa';
-import './PetByCategoryPage.css';
+import './PetSearchPage.css';
+// require('dotenv').config()
 
-const petCategoryId = {
-    '6462c865c6824c90a49e9843': 'Cats',
-    '6462c7dcc6824c90a49e983e': 'Dogs',
-    '6462df4a03139ccfcef2982c': 'Birds',
-}
+const apiUrl = process.env.REACT_APP_API_URL;
 
-function PetByCategoryPage() {
-    const { categoryId } = useParams();
+function PetSearchPage() {
+    const { searchTerm: searchTermParam } = useParams();
     const [pets, setPets] = useState([]);
+    const [searchTerm, setSearchTerm] = useState('');
+
+    const handleSearchSubmit = (e) => {
+        e.preventDefault();
+        performSearch();
+    };
+
+    const performSearch = () => {
+        if (searchTerm.trim()) {
+            // Redirect to PetSearchPage with the search term as a parameter
+            window.location.href = `/search/${searchTerm}`;
+            // history.push(`/search/${searchTerm}`);
+        }
+    };
+
+    const handleKeyPress = (e) => {
+        if (e.key === 'Enter' && searchTerm.trim()) {
+            e.preventDefault();
+            performSearch();
+        }
+    };
 
     useEffect(() => {
-        const fetchPetsByCategory = async () => {
+        const searchPets = async () => {
             try {
-                const response = await fetch(`https://gettapet-server.onrender.com/api/pet/category/${categoryId}`);
+                const response = await fetch(`${apiUrl}/pet/search/${searchTermParam}`);
                 if (!response.ok) {
-                    throw new Error('Failed to fetch pets by category');
+                    throw new Error('Error searching for pets');
                 }
                 const data = await response.json();
                 setPets(data.pets);
-                console.log(data)
-                console.log(pets)
+                return pets;
             } catch (error) {
                 console.error(error);
+                throw error;
             }
         };
 
-        fetchPetsByCategory();
-    }, [categoryId]);
+        if (searchTermParam) {
+            searchPets();
+        }
+    }, [searchTermParam]);
+
 
     return (
         <div className="homepage-container">
             {/* Top Bar */}
-            <div class="search-bar-container">
+            <div className="search-bar-container">
                 <button className="back-button" onClick={() => window.history.back()}>
                     <i className="fas fa-chevron-left"></i>
                 </button>
-                <div class="search-wrapper">
-                    <input type="text" class="search-bar" placeholder="Search" />
-                    <i class="fas fa-search"></i>
+                <div className="search-wrapper">
+                    <input
+                        type="text"
+                        className="search-bar"
+                        placeholder="Search"
+                        value={searchTerm}
+                        onChange={(e) => setSearchTerm(e.target.value)}
+                        onKeyPress={handleKeyPress}
+                    />
+                    <i className="fas fa-search" onClick={handleSearchSubmit}></i>
                 </div>
             </div>
             <div className="pet-by-category-container">
@@ -66,12 +94,12 @@ function PetByCategoryPage() {
                 <Link to="/new-post" className="bottom-panel-icon">
                     <FaPlus />
                 </Link>
-                <Link to="/" className="bottom-panel-icon">
+                {/* <Link to="/" className="bottom-panel-icon">
                     <FaUser />
-                </Link>
+                </Link> */}
             </div>
         </div>
-    )
+    );
 }
 
-export default PetByCategoryPage;
+export default PetSearchPage;
